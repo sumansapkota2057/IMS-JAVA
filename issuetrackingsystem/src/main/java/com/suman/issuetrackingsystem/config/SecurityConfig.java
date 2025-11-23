@@ -13,6 +13,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -28,9 +29,14 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable());
         http.httpBasic(Customizer.withDefaults());
 
+        http.sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+        );
+
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/register", "/auth/login").permitAll()
                 .requestMatchers("/api/roles", "/api/users").hasRole("ADMIN")
+                .requestMatchers("/api/posts","/api/posts/**").authenticated()
                 .anyRequest().denyAll()
         );
 

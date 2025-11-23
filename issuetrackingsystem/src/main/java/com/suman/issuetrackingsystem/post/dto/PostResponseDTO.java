@@ -20,6 +20,8 @@ public class PostResponseDTO {
     private PostType postType;
     private PostStatus status;
     private LocalDateTime createdAt;
+    private Long createdBy;
+    private Long approvedBy;
     private LocalDateTime updatedAt;
     private LocalDateTime approvedAt;
     private String rejectionReason;

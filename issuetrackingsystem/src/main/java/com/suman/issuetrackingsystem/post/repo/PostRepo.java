@@ -11,6 +11,6 @@ import java.util.List;
 public interface PostRepo extends JpaRepository<Post,Long> {
 
     List<Post> findByCreatedBy(Long userId);
-    List<Post> findByStatus (PostStatus status);
-    List<Post> findByCreatedByAndStatus(Long userId, PostStatus status);
+    List<Post> findByPostStatus(PostStatus postStatus);
+    List<Post> findByCreatedByAndPostStatus(Long userId, PostStatus postStatus);
 }

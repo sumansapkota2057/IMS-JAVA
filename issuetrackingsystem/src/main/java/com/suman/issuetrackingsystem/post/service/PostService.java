@@ -25,7 +25,7 @@ public class PostService {
         post.setDescription(dto.getDescription());
         post.setPostType(dto.getPostType());
         post.setCreatedBy(userId);
-        post.setPostStatus(dto.isSubmitForApproval() ? PostStatus.APPROVED : PostStatus.DRAFT);
+        post.setPostStatus(dto.isSubmitForApproval() ? PostStatus.PENDING : PostStatus.DRAFT);
 
         Post savedPost = postRepo.save(post);
         return mapToDTO(savedPost);
@@ -92,7 +92,7 @@ public class PostService {
     }
 
     public List<PostResponseDTO> getApprovedPosts() {
-        List<Post> posts = postRepo.findByStatus(PostStatus.APPROVED);
+        List<Post> posts = postRepo.findByPostStatus(PostStatus.APPROVED);
         return posts.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
@@ -102,7 +102,7 @@ public class PostService {
     }
 
     public List<PostResponseDTO> getPendingApprovalPosts() {
-        List<Post> posts = postRepo.findByStatus(PostStatus.PENDING);
+        List<Post> posts = postRepo.findByPostStatus(PostStatus.PENDING);
         return posts.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
