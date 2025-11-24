@@ -21,6 +21,7 @@ public class PostResponseDTO {
     private PostStatus status;
     private LocalDateTime createdAt;
     private Long createdBy;
+    private String createdByName;
     private Long approvedBy;
     private LocalDateTime updatedAt;
     private LocalDateTime approvedAt;

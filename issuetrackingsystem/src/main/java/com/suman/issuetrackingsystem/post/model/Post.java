@@ -27,6 +27,7 @@ public class Post {
     private PostStatus postStatus = PostStatus.DRAFT;
 
     private  Long createdBy;
+    private String createdByName;
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 

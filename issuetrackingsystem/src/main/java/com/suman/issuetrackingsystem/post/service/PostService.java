@@ -19,13 +19,14 @@ public class PostService {
     @Autowired
     private PostRepo postRepo;
 
-    public PostResponseDTO createPost(PostRequestDTO dto, Long userId) {
+    public PostResponseDTO createPost(PostRequestDTO dto, Long userId,String userName) {
         Post post = new Post();
         post.setTitle(dto.getTitle());
         post.setDescription(dto.getDescription());
         post.setPostType(dto.getPostType());
         post.setCreatedBy(userId);
-        post.setPostStatus(dto.isSubmitForApproval() ? PostStatus.PENDING : PostStatus.DRAFT);
+        post.setCreatedByName(userName);
+        post.setPostStatus( PostStatus.DRAFT);
 
         Post savedPost = postRepo.save(post);
         return mapToDTO(savedPost);
@@ -120,6 +121,8 @@ public class PostService {
         dto.setPostType(post.getPostType());
         dto.setStatus(post.getPostStatus());
         dto.setCreatedAt(post.getCreatedAt());
+        dto.setCreatedBy(post.getCreatedBy());
+        dto.setCreatedByName(post.getCreatedByName());
         dto.setUpdatedAt(post.getUpdatedAt());
         dto.setApprovedAt(post.getApprovedAt());
         dto.setRejectionReason(post.getRejectionReason());

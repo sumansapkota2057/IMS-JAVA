@@ -13,10 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -31,7 +28,7 @@ public class PostController {
 
     public ResponseEntity<?> createPost (@RequestBody PostRequestDTO dto, @AuthenticationPrincipal UserPrincipal userPrincipal) {
         try{
-            var response = postService.createPost(dto,userPrincipal.getId());
+            var response = postService.createPost(dto,userPrincipal.getId(),userPrincipal.getUsername());
             return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseBuilder()
                     .status(HttpStatus.CREATED)
             .message("Post created successfully")
@@ -44,6 +41,25 @@ public class PostController {
                     .build());
         }
     }
+
+    @PostMapping("/posts/{postId}/submit-approval")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<?> submitForApproval(@PathVariable Long postId, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        try {
+            var response = postService.submitForApproval(postId, userPrincipal.getId());
+            return ResponseEntity.ok(new ApiResponseBuilder()
+                    .status(HttpStatus.OK)
+                    .message("Post submitted for approval")
+                    .data(response)
+                    .build());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ApiResponseBuilder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(e.getMessage())
+                    .build());
+        }
+    }
+
 
 
 
