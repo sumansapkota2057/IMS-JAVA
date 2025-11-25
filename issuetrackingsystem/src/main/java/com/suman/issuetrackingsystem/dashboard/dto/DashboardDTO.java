@@ -1,0 +1,21 @@
+package com.suman.issuetrackingsystem.dashboard.dto;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DashboardDTO {
+
+    private long totalPosts;
+    private long pendingApprovalPosts;
+    private long approvedPosts;
+    private long rejectedPosts;
+    private long resolvedPosts;
+    private long totalUsers;
+    private long activeUsers;
+    private long inactiveUsers;
+}

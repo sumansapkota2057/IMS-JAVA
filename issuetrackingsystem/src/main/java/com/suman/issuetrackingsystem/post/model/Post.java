@@ -42,7 +42,10 @@ public class Post {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt = LocalDateTime.now();
 
+    private LocalDateTime approvedAt = LocalDateTime.now();
+
     @Column(columnDefinition = "TEXT")
     private String adminNotes;
+
 
 }

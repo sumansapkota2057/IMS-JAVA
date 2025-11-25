@@ -1,16 +1,17 @@
 package com.suman.issuetrackingsystem.post.dto;
 
-import com.suman.issuetrackingsystem.post.model.PostType;
+import com.suman.issuetrackingsystem.post.model.PostStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostRequestDTO {
+public class PostUpdateDTO {
     private String title;
     private String description;
-    private PostType postType;
-
+    private PostStatus status;
+    private String adminNotes;
 }
