@@ -1,6 +1,7 @@
 package com.suman.issuetrackingsystem.user.model;
 
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,17 @@ public class User {
       private Long id;
       @Column (unique = true)
       private  String username;
+
+      @Column (nullable = false,unique = true)
       private String email;
+
+      private String fullName;
+
+
+      private boolean active = true;
+
+
+      @Column(nullable = false)
       private  String password;
 
 
