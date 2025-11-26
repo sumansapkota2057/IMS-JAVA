@@ -143,7 +143,7 @@ public class PostService {
             throw new ResourceNotFoundException("User not found with username: " + username);
         }
 
-        List<Post> posts = postRepo.findByCreatedBy(user.getId());
+        List<Post> posts = postRepo.findByUser_Id(user.getId());
 
         return postMapper.toDtoList(posts);
     }
@@ -176,7 +176,7 @@ public class PostService {
         if (user == null) {
             throw new ResourceNotFoundException("User not found with username: " + username);
         }
-        List<Post> posts = postRepo.findByCreatedByAndPostStatus(user.getId(), postStatus);
+        List<Post> posts = postRepo.findByUser_IdAndPostStatus(user.getId(), postStatus);
         return postMapper.toDtoList(posts);
     }
 
@@ -185,7 +185,7 @@ public class PostService {
     }
 
     public long countPostsByStatus(PostStatus status) {
-        return postRepo.countByStatus(status);
+        return postRepo.countByPostStatus(status);
     }
     public List<PostResponseDTO> getPostsByStatus(PostStatus status) {
         List<Post> posts = postRepo.findByPostStatus(status);

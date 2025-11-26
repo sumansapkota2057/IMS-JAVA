@@ -26,6 +26,8 @@ public class User {
       private String email;
 
       private String fullName;
+
+
       private boolean active = true;
 
 

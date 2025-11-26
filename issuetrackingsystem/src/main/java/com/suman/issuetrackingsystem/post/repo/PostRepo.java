@@ -10,8 +10,12 @@ import java.util.List;
 @Repository
 public interface PostRepo extends JpaRepository<Post,Long> {
 
-    List<Post> findByCreatedBy(Long userId);
+    List<Post> findByUser_Id(Long userId);
+
     List<Post> findByPostStatus(PostStatus postStatus);
-    List<Post> findByCreatedByAndPostStatus(Long userId, PostStatus postStatus);
-    long countByStatus(PostStatus status);
+
+    List<Post>findByPostId(Long postId);
+
+    List<Post> findByUser_IdAndPostStatus(Long userId, PostStatus postStatus);
+    long countByPostStatus(PostStatus status);
 }
