@@ -52,6 +52,8 @@ public class SecurityConfig {
                 .requestMatchers("/auth/register", "/auth/login").permitAll()
                 .requestMatchers("/api/roles", "/api/users").hasRole("ADMIN")
                 .requestMatchers("/api/posts","/api/posts/**").authenticated()
+                .requestMatchers("/api/dashboard/**").hasRole("ADMIN")
+                .requestMatchers(("/api/comments/**")).authenticated()
                 .anyRequest().denyAll()
         );
 

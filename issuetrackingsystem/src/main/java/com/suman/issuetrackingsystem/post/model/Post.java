@@ -1,6 +1,7 @@
 package com.suman.issuetrackingsystem.post.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.suman.issuetrackingsystem.user.model.User;
 import com.suman.issuetrackingsystem.user.model.UserPrincipal;
 import jakarta.persistence.*;
@@ -26,6 +27,7 @@ public class Post {
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)
+
     private PostType postType;
 
     @Enumerated (EnumType.STRING)

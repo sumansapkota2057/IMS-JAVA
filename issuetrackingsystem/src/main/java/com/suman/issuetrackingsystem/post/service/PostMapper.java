@@ -2,6 +2,9 @@ package com.suman.issuetrackingsystem.post.service;
 
 import com.suman.issuetrackingsystem.post.dto.PostResponseDTO;
 import com.suman.issuetrackingsystem.post.model.Post;
+
+
+import com.suman.issuetrackingsystem.user.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,7 +12,16 @@ import java.util.List;
 @Component
 public class PostMapper {
 
+
     public PostResponseDTO mapToDto(Post post) {
+
+        UserDTO userDTO = null;
+        if (post.getUser() != null) {
+            userDTO = new UserDTO(post.getUser().getId(), post.getUser().getUsername());
+        }
+
+
+
         PostResponseDTO dto = new PostResponseDTO();
         dto.setId(post.getId());
         dto.setTitle(post.getTitle());
@@ -19,7 +31,8 @@ public class PostMapper {
         dto.setAdminNotes(post.getAdminNotes());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());
-        dto.setUsername(post.getUser().getUsername());
+        dto.setUser(userDTO);
+
         return dto;
     }
 
@@ -29,3 +42,4 @@ public class PostMapper {
                 .toList();
     }
 }
+

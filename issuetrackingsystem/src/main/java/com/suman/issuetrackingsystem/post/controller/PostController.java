@@ -4,7 +4,7 @@ package com.suman.issuetrackingsystem.post.controller;
 import com.suman.issuetrackingsystem.post.dto.PostRequestDTO;
 import com.suman.issuetrackingsystem.post.dto.PostResponseDTO;
 import com.suman.issuetrackingsystem.post.dto.PostUpdateDTO;
-import com.suman.issuetrackingsystem.post.model.Post;
+
 import com.suman.issuetrackingsystem.post.service.PostService;
 import com.suman.issuetrackingsystem.util.ApiResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/posts")
 @CrossOrigin(origins = "*")
 
 
@@ -106,7 +106,7 @@ public class PostController {
                 .build());
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         List<PostResponseDTO> posts = postService.getAllPosts();
         return ResponseEntity.ok(new ApiResponseBuilder()
