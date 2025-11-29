@@ -19,7 +19,7 @@ public class DashboardService {
     public DashboardDTO getStats() {
         DashboardDTO stats = new DashboardDTO();
 
-        stats.setTotalPosts(postRepo.count());
+        stats.setTotalPosts(postRepo.countByPostStatusNot(PostStatus.DRAFT));
         stats.setPendingApprovalPosts(postRepo.countByPostStatus(PostStatus.PENDING));
         stats.setApprovedPosts(postRepo.countByPostStatus(PostStatus.APPROVED));
         stats.setRejectedPosts(postRepo.countByPostStatus(PostStatus.REJECTED));

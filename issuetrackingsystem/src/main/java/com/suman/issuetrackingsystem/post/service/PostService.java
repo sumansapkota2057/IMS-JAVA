@@ -156,7 +156,7 @@ public class PostService {
 
 
     public List<PostResponseDTO> getAllPosts() {
-        return postMapper.toDtoList(postRepo.findAll());
+        return postMapper.toDtoList(postRepo.findByPostStatusNot(PostStatus.DRAFT));
     }
 
     public List<PostResponseDTO> getPendingPosts() {
@@ -181,7 +181,7 @@ public class PostService {
     }
 
     public long getTotalPosts(){
-        return postRepo.count();
+        return postRepo.countByPostStatusNot(PostStatus.DRAFT);
     }
 
     public long countPostsByStatus(PostStatus status) {
