@@ -41,12 +41,5 @@ public class CommentController {
                 .build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteComment(@PathVariable Long id, Authentication auth) {
-        commentService.deleteComment(id, auth.getName());
-        return ResponseEntity.ok(new ApiResponseBuilder()
-                .status(HttpStatus.OK)
-                .message("Comment deleted successfully")
-                .build());
-    }
+
 }
