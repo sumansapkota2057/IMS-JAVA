@@ -149,7 +149,7 @@ public class PostService {
     }
 
     public List<PostResponseDTO> getApprovedPosts() {
-        List<Post> posts = postRepo.findByPostStatus(PostStatus.APPROVED);
+        List<Post> posts = postRepo.findByPostStatusOrderByCreatedAtDesc(PostStatus.APPROVED);
         return postMapper.toDtoList(posts);
     }
 

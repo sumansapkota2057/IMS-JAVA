@@ -21,4 +21,5 @@ public interface PostRepo extends JpaRepository<Post,Long> {
 
     long countByPostStatus(PostStatus status);
     long countByPostStatusNot(PostStatus status);
+    List<Post> findByPostStatusOrderByCreatedAtDesc(PostStatus postStatus);
 }
