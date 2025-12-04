@@ -3,6 +3,7 @@ package com.suman.issuetrackingsystem.user.model;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,8 +32,9 @@ public class User {
       private boolean active = true;
 
 
-      @Column(nullable = false)
-      private  String password;
+    @NotBlank(message = "Password is required")
+    @Column(nullable = false)
+    private String password;
 
 
     @ManyToMany(fetch = FetchType.EAGER)

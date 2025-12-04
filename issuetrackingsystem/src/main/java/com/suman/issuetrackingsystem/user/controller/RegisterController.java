@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.suman.issuetrackingsystem.user.model.User;
 import com.suman.issuetrackingsystem.user.service.UserService;
 import com.suman.issuetrackingsystem.util.ApiResponseBuilder;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping(value  ="/register")
-    public ResponseEntity<Map<String, Object>> registerUser(@RequestBody User user) throws JsonProcessingException {
+    public ResponseEntity<Map<String, Object>> registerUser( @RequestBody @Valid User user) throws JsonProcessingException {
         userService.registerUser(user);
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ApiResponseBuilder()
