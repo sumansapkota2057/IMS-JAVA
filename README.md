@@ -21,13 +21,15 @@
   
   All responses are wrapped using a common structure (`ApiResponseBuilder`):
   
-  ```json
+  
   {
   "status": "OK",
   "message": "Some message",
   "data": { }
 }
 ## Authentication & Authorization
+
+
 Authentication & Authorization
 Authentication
 
