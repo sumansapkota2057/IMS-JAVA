@@ -1,59 +1,62 @@
-  # API Documentation – Issue Tracking System
-  
-  ## Overview
-  
-  This project is a Spring Boot–based **Issue Tracking / Post Management System**.
-  
-  Main features:
-  
-  - User registration and login
-  - Role-based access control (`ADMIN`, normal user)
-  - Create, edit, and submit posts for approval
-  - Admin review: approve, reject, resolve posts
-  - View personal posts and approved posts
-  
-  The backend is built using:
-  
-  - Spring Boot
-  - Spring Security
-  - Spring Data JPA
-  - BCrypt for password hashing
-  
-API Endpoints
-Auth
+# API Documentation – Issue Tracking System
 
-POST /auth/register
+## Overview
 
-POST /auth/login
+This project is a Spring Boot–based **Issue Tracking / Post Management System**.
 
-Users
+Main features:
 
-GET /api/users
+- User registration and login
+- Role-based access control (`ADMIN`, normal user)
+- Create, edit, and submit posts for approval
+- Admin review: approve, reject, resolve posts
+- View personal posts and approved posts
 
-Roles
+The backend is built using:
 
-POST /api/roles
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- BCrypt for password hashing
 
-GET /api/roles
+---
 
-Posts
+## API Endpoints by Feature
 
-POST /api/posts
+### 1. User registration and login
 
-PUT /api/posts/{id}/submit
+- `POST /auth/register`
+- `POST /auth/login`
 
-PUT /api/posts/{id}/approve
+---
 
-PUT /api/posts/{id}/reject
+### 2. Role-based access control (ADMIN, normal user)
 
-PUT /api/posts/{id}/resolve
+- `GET /api/users`
+- `POST /api/roles`
+- `GET /api/roles`
 
-PUT /api/posts/{id}
+---
 
-GET /api/posts/my-posts
+### 3. Create, edit, and submit posts for approval
 
-GET /api/posts/approved
+- `POST /api/posts`
+- `PUT /api/posts/{id}`
+- `PUT /api/posts/{id}/submit`
 
-GET /api/posts/all
+---
 
-GET /api/posts/{id}
+### 4. Admin review: approve, reject, resolve posts
+
+- `PUT /api/posts/{id}/approve`
+- `PUT /api/posts/{id}/reject`
+- `PUT /api/posts/{id}/resolve`
+
+---
+
+### 5. View personal posts and approved posts
+
+- `GET /api/posts/my-posts`
+- `GET /api/posts/approved`
+- `GET /api/posts/all`
+- `GET /api/posts/{id}`
