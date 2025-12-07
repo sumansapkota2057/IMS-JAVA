@@ -1,32 +1,33 @@
-# API Documentation – Issue Tracking System
-
-## Overview
-
-This project is a Spring Boot–based **Issue Tracking / Post Management System**.
-
-Main features:
-
-- User registration and login
-- Role-based access control (`ADMIN`, normal user)
-- Create, edit, and submit posts for approval
-- Admin review: approve, reject, resolve posts
-- View personal posts and approved posts
-
-The backend is built using:
-
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- BCrypt for password hashing
-
-All responses are wrapped using a common structure (`ApiResponseBuilder`):
-
-```json
-{
+  # API Documentation – Issue Tracking System
+  
+  ## Overview
+  
+  This project is a Spring Boot–based **Issue Tracking / Post Management System**.
+  
+  Main features:
+  
+  - User registration and login
+  - Role-based access control (`ADMIN`, normal user)
+  - Create, edit, and submit posts for approval
+  - Admin review: approve, reject, resolve posts
+  - View personal posts and approved posts
+  
+  The backend is built using:
+  
+  - Spring Boot
+  - Spring Security
+  - Spring Data JPA
+  - BCrypt for password hashing
+  
+  All responses are wrapped using a common structure (`ApiResponseBuilder`):
+  
+  ```json
+  {
   "status": "OK",
   "message": "Some message",
   "data": { }
 }
+## Authentication & Authorization
 Authentication & Authorization
 Authentication
 
@@ -75,16 +76,13 @@ POST /auth/register
 
 
 Description
-
 Register a new user.
 
 Authentication
-
 Not required (public).
 
 Request Body
-
-Represents the User entity fields needed for registration:
+Represents the User fields needed for registration:
 
 {
   "username": "johndoe",
@@ -113,13 +111,10 @@ POST /auth/login
 
 
 Description
-
 Validate user credentials.
 
 Authentication
-
-Not required for the call itself.
-
+Not required for this call itself.
 After login, Spring Security authenticates the user using AuthenticationManager.
 
 Request Body
@@ -141,7 +136,7 @@ Response Example
 2. User APIs (/api/users)
 
 Controller: UserController
-Secured with hasRole("ADMIN").
+Security: hasRole("ADMIN")
 
 2.1 Get All Users
 
@@ -151,7 +146,6 @@ GET /api/users
 
 
 Description
-
 Retrieve all registered users.
 
 Authentication / Authorization
@@ -185,7 +179,7 @@ Response Example
 3. Role APIs (/api/roles)
 
 Controller: RoleController
-Secured with hasRole("ADMIN").
+Security: hasRole("ADMIN")
 
 3.1 Create Role
 
@@ -195,7 +189,6 @@ POST /api/roles
 
 
 Description
-
 Create a new role.
 
 Authentication / Authorization
@@ -227,7 +220,6 @@ GET /api/roles
 
 
 Description
-
 Retrieve all roles.
 
 Authentication / Authorization
@@ -283,7 +275,6 @@ POST /api/posts
 
 
 Description
-
 Create a new post. New posts are created with status DRAFT.
 
 Authentication / Authorization
@@ -331,7 +322,6 @@ PUT /api/posts/{id}/submit
 
 
 Description
-
 Submit a DRAFT post for admin approval. Status changes from DRAFT → PENDING.
 
 Authentication / Authorization
@@ -354,14 +344,13 @@ PUT /api/posts/{id}/approve
 
 
 Description
-
 Approve a PENDING post. Status changes from PENDING → APPROVED.
 
 Authentication / Authorization
 
 Requires authentication.
 
-Intended for ADMIN users (should be restricted in security config).
+Intended for ADMIN users.
 
 Only posts with status PENDING can be approved.
 
@@ -381,7 +370,6 @@ PUT /api/posts/{id}/reject
 
 
 Description
-
 Reject a PENDING post. Status changes from PENDING → REJECTED.
 
 Authentication / Authorization
@@ -408,7 +396,6 @@ PUT /api/posts/{id}/resolve
 
 
 Description
-
 Mark an APPROVED post as RESOLVED.
 
 Authentication / Authorization
@@ -435,7 +422,6 @@ PUT /api/posts/{id}
 
 
 Description
-
 Update title and/or description of a post.
 
 Authentication / Authorization
@@ -458,7 +444,7 @@ Request Body (PostUpdateDTO)
 }
 
 
-Only non-null title/description are updated.
+Only non-null title / description are updated.
 
 4.7 Get My Posts
 
@@ -468,7 +454,6 @@ GET /api/posts/my-posts
 
 
 Description
-
 Get all posts created by the currently authenticated user.
 
 Authentication / Authorization
@@ -507,12 +492,11 @@ GET /api/posts/approved
 
 
 Description
-
 Get all posts with status APPROVED, ordered by createdAt descending.
 
 Authentication / Authorization
 
-Requires authentication (according to SecurityConfig).
+Requires authentication.
 
 Any logged-in user.
 
@@ -524,7 +508,6 @@ GET /api/posts/all
 
 
 Description
-
 Get all posts where status is not DRAFT (PENDING, APPROVED, REJECTED, RESOLVED).
 
 Authentication / Authorization
@@ -539,7 +522,6 @@ GET /api/posts/{id}
 
 
 Description
-
 Get a single post by its ID.
 
 Authentication / Authorization
@@ -651,7 +633,6 @@ Admin resolves an approved post (PUT /api/posts/{id}/resolve) → RESOLVED.
 
 Users can view:
 
-Their own posts: GET /api/posts/my-posts
+Their own posts → GET /api/posts/my-posts
 
-Approved posts: GET /api/posts/approved
-
+Approved posts → GET /api/posts/approved
